@@ -6,7 +6,21 @@ public class SoftwareConstants {
 	public static final int ARM_SPEED = 1;
 	public static final int SHOOTER_SPEED = 1;
 	public static final double SHOOTER_SPEED_OFF = 0;
-
+	public static final int ENCODER_CODES_PER_REV = 360;
+	public static final float NOMINAL_OUTPUT_VOLTAGE =0.00f;
+	public static final float PEAK_OUTPUT_VOLTAGE =12.0f;
+	
+	public static final int PROFILE_NUM =0;
+	public static final double LEFT_Fp =0;
+	public static final double LEFT_Kp=0.1;
+	public static final double LEFT_Ip = 0;
+	public static final double LEFT_Dp =0;
+	
+	public static final double RIGHT_Fp =0;
+	public static final double RIGHT_Kp=0.1;
+	public static final double RIGHT_Ip = 0;
+	public static final double RIGHT_Dp =0;
+	public static final double ARM_VOLTAGE_RAMP_RATE = 3;
 	
 
 

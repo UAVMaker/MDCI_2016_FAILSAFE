@@ -3,28 +3,25 @@ package com.team1601.FRC_2016;
 
 import java.util.Vector;
 
+import com.team1601.FRC_2016.AutonomousModules.DriveStraightAuto;
+import com.team1601.FRC_2016.SystemModules.PneumaticControl;
 import com.team1601.FRC_2016.TeleoperatedModules.ArmControl;
 import com.team1601.FRC_2016.TeleoperatedModules.DriverControl;
 import com.team1601.FRC_2016.TeleoperatedModules.ShooterControl;
+import com.team1601.FRC_2016.TestModules.ShooterTest;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the IterativeRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
- */
+
 public class Robot extends IterativeRobot {
 
     final String defaultAuto = "Default";
     final String customAuto = "My Auto";
     String autoSelected;
     SendableChooser chooser;
-    Vector<Thread> teleopThreads;
+    Vector<Thread> systemThreads, autoThreads, testThreads,teleopThreads;
    
     /**
      * This function is run when the robot is first started up and should be
@@ -35,6 +32,15 @@ public class Robot extends IterativeRobot {
         chooser.addDefault("Default Auto", defaultAuto);
         chooser.addObject("My Auto", customAuto);
         SmartDashboard.putData("Auto choices", chooser);
+        
+        systemThreads = new Vector<Thread>();
+        systemThreads.addElement(new PneumaticControl());
+        
+        autoThreads = new Vector<Thread>();
+        autoThreads.addElement(new DriveStraightAuto());
+        testThreads = new Vector<Thread>();
+        testThreads.addElement(new ShooterTest());
+        
         teleopThreads = new Vector<Thread>();
         teleopThreads.addElement(new ArmControl());
         teleopThreads.addElement(new DriverControl());
@@ -42,15 +48,6 @@ public class Robot extends IterativeRobot {
         
     }
     
-	/**
-	 * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
-	 * using the dashboard. The sendable chooser code works with the Java SmartDashboard. If you prefer the LabVIEW
-	 * Dashboard, remove all of the chooser code and uncomment the getString line to get the auto name from the text box
-	 * below the Gyro
-	 *
-	 * You can add additional auto modes by adding additional comparisons to the switch structure below with additional strings.
-	 * If using the SendableChooser make sure to add them to the chooser code above as well.
-	 */
 
     public void autonomousInit(){
     	
@@ -60,32 +57,46 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-
+    	startThreads(systemThreads);
+    	startThreads(autoThreads);
     }
 
     /**
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        for(int i =0; i <= teleopThreads.size(); i++){
-        	((Thread)teleopThreads.elementAt(i)).start();
-        }
+    	startThreads(systemThreads);
+    	startThreads(teleopThreads);
     }
     
     /**
      * This function is called periodically during test mode
      */
     public void testPeriodic() {
-    
+    	startThreads(testThreads);
     }
     public void disabledInit(){
     	
     }
     public void disabledPeriodic(){
-    	   for(int i =0; i <= teleopThreads.size(); i++){
-           	((Thread)teleopThreads.elementAt(i)).interrupt();
-           }
+    	stopThreads(systemThreads);
+    	stopThreads(autoThreads);
+    	stopThreads(teleopThreads);
+    	stopThreads(testThreads);
     }
+    
+    public void startThreads(Vector<Thread> threads){
+    	for(int i =0; i<=threads.size(); i++){
+    		((Thread)threads.elementAt(i)).start();
+    	}
+    }
+    
+    public void stopThreads(Vector<Thread> threads){
+    	for(int i =0; i<=threads.size(); i++){
+    		((Thread)threads.elementAt(i)).interrupt();
+    	}
+    }
+    
 
     
 }

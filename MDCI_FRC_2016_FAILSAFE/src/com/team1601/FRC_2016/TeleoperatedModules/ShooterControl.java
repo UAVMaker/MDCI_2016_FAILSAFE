@@ -9,10 +9,10 @@ public class ShooterControl extends Thread{
 	ShooterBase shooter = ShooterBase.getInstance();
 	LogitechController joystick = JoystickManager.getInstance().getOperatorJoystick();
 	public void run(){
-		if(joystick.getLT())shooter.shoot();
+		if(joystick.getLT())shooter.shootAuto();
 		else if(joystick.getRT())shooter.indexBall();
-		else shooter.flywhellOff();
+		else shooter.flywheelOff();
 		
-		shooter.compressorOperation(true);
+		
 	}
 }

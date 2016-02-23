@@ -14,6 +14,9 @@ private JoystickManager(){
 	joysticks = new LogitechController [2];
 	joystick1 = joysticks[0];
 	joystick2 = joysticks[1];
+	
+	joystick1.setDeadBand(HardwareConstants.JOYSTICK1_DEADBAND);
+	joystick2.setDeadBand(HardwareConstants.JOYSTICK2_DEADBAND);
 }
 public LogitechController getDriverJoystick(){
 	return joystick1;
