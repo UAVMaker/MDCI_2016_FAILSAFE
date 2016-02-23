@@ -21,6 +21,7 @@ public class SoftwareConstants {
 	public static final double RIGHT_Ip = 0;
 	public static final double RIGHT_Dp =0;
 	public static final double ARM_VOLTAGE_RAMP_RATE = 3;
+	public static final int DRIVE_BASE_RAMP_RATE = 3;
 	
 
 

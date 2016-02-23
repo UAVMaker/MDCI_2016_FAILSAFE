@@ -2,10 +2,10 @@ package com.team1601.FRC_2016.TeleoperatedModules;
 
 import com.team1601.FRC_2016.HardwareModule.ArmBase;
 import com.team1601.FRC_2016.HardwareModule.JoystickManager;
-import com.team1601.FRC_2016.Utilities.LogitechController;
+import com.team1601.FRC_2016.Utilities.Logitech;
 
 public class ArmControl extends Thread {
-	LogitechController joystick = JoystickManager.getInstance().getOperatorJoystick();
+	Logitech joystick = JoystickManager.getInstance().getOperatorJoystick();
 	ArmBase arm = ArmBase.getInstance();
 
 	public void run() {

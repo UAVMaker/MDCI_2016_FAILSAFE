@@ -2,11 +2,11 @@ package com.team1601.FRC_2016.Utilities;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-public class LogitechController {
+public class Logitech {
 	private Joystick marco;
 	private double deadBand;
 
-	public LogitechController(int port) {
+	public Logitech(int port) {
 		marco = new Joystick(port);
 	}
 

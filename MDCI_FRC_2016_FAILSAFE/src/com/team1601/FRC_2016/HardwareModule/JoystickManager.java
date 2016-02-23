@@ -1,28 +1,28 @@
 package com.team1601.FRC_2016.HardwareModule;
 
-import com.team1601.FRC_2016.Utilities.LogitechController;
+import com.team1601.FRC_2016.Utilities.Logitech;
 
 public class JoystickManager {
-LogitechController[] joysticks;
-LogitechController joystick1, joystick2;
+Logitech[] joysticks;
+Logitech joystick1, joystick2;
 private static final JoystickManager INSTANCE = new JoystickManager();
 
 public static JoystickManager getInstance(){
 	return INSTANCE;
 }
 private JoystickManager(){
-	joysticks = new LogitechController [2];
+	joysticks = new Logitech [2];
 	joystick1 = joysticks[0];
 	joystick2 = joysticks[1];
 	
 	joystick1.setDeadBand(HardwareConstants.JOYSTICK1_DEADBAND);
 	joystick2.setDeadBand(HardwareConstants.JOYSTICK2_DEADBAND);
 }
-public LogitechController getDriverJoystick(){
+public Logitech getDriverJoystick(){
 	return joystick1;
 }
 
-public LogitechController getOperatorJoystick(){
+public Logitech getOperatorJoystick(){
 	return joystick2;
 }
 }

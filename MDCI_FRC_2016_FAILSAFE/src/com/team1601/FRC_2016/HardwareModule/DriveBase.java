@@ -79,7 +79,11 @@ public class DriveBase {
 		   rightDrive.setI(SoftwareConstants.RIGHT_Ip); 
 		   rightDrive.setD(SoftwareConstants.RIGHT_Dp);
 	        
-	        
+	        /*
+	         * Set the Voltage per Second Ramp Rate
+	         */
+		   leftDrive.setCloseLoopRampRate(SoftwareConstants.DRIVE_BASE_RAMP_RATE);
+		   rightDrive.setCloseLoopRampRate(SoftwareConstants.DRIVE_BASE_RAMP_RATE);
 		/*
 		 * Create the Robot Drive
 		 */
@@ -119,6 +123,15 @@ public class DriveBase {
 		drive.tankDrive(left, right);
 		
 	}
+	public void drive(double linear, double rotate){
+		drive.drive(linear, rotate);
+	}
+	
+	public void moveInches(double inches){
+	
+	}
+	
+	
 	
 
 }
