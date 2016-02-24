@@ -6,6 +6,7 @@ import java.util.Vector;
 import com.team1601.FRC_2016.AutonomousModules.DriveStraightAuto;
 import com.team1601.FRC_2016.SystemModules.PneumaticControl;
 import com.team1601.FRC_2016.TeleoperatedModules.ArmControl;
+import com.team1601.FRC_2016.TeleoperatedModules.Climber;
 import com.team1601.FRC_2016.TeleoperatedModules.DriverControl;
 import com.team1601.FRC_2016.TeleoperatedModules.ShooterControl;
 import com.team1601.FRC_2016.TestModules.ShooterTest;
@@ -45,6 +46,7 @@ public class Robot extends IterativeRobot {
         teleopThreads.addElement(new ArmControl());
         teleopThreads.addElement(new DriverControl());
         teleopThreads.addElement(new ShooterControl());
+        teleopThreads.addElement(new Climber());
         
     }
     

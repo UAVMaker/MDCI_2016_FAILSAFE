@@ -19,6 +19,8 @@ public class PneumaticControl extends Thread {
 			} else {
 				pneu.stop();
 			}
+			
+			
 		}
 	}
 }

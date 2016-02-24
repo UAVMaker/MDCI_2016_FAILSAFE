@@ -3,7 +3,7 @@ package com.team1601.FRC_2016.HardwareModule;
 public class SoftwareConstants {
 	public static final double loopSpeed = 1/100;
 	public static final double INDEX_SPEED = -0.25;
-	public static final int ARM_SPEED = 1;
+	public static final double ARM_SPEED = .25;
 	public static final int SHOOTER_SPEED = 1;
 	public static final double SHOOTER_SPEED_OFF = 0;
 	public static final int ENCODER_CODES_PER_REV = 360;
@@ -22,6 +22,7 @@ public class SoftwareConstants {
 	public static final double RIGHT_Dp =0;
 	public static final double ARM_VOLTAGE_RAMP_RATE = 3;
 	public static final int DRIVE_BASE_RAMP_RATE = 3;
+	public static final double CLIMB_MOTOR_SPEED = .5;
 	
 
 

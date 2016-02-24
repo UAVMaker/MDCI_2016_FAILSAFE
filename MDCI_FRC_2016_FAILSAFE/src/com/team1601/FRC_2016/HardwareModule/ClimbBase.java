@@ -1,12 +1,13 @@
 package com.team1601.FRC_2016.HardwareModule;
 
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class ClimbBase {
 	// Create the DoubleSolenoid controlling the Climber
 	DoubleSolenoid climber;
-	
+	CANTalon climb;
 	/*
 	 * Create a private instance of this class to know that it will only be
 	 * created once.
@@ -22,6 +23,7 @@ public class ClimbBase {
 	private ClimbBase() {
 		climber = new DoubleSolenoid(HardwareConstants.PCM, HardwareConstants.CLIMBER_FORWARD,
 				HardwareConstants.CLIMBER_REVERSE);
+		climb = new CANTalon(HardwareConstants.CLIMBER_MOTOR_PORT);
 	}
 
 	// Actuator goes up
@@ -39,4 +41,13 @@ public class ClimbBase {
 		climber.set(Value.kOff);
 	}
 
+	public void climberArmUP(){
+		climb.set(SoftwareConstants.CLIMB_MOTOR_SPEED);
+	}
+	public void climberArmDOWN(){
+		climb.set(-SoftwareConstants.CLIMB_MOTOR_SPEED);
+	}
+	public void climberArmSTOP(){
+		climb.set(0);
+	}
 }
