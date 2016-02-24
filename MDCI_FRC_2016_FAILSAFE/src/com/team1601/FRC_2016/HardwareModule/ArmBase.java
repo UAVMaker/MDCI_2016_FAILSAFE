@@ -5,9 +5,11 @@ import edu.wpi.first.wpilibj.CANTalon;
 
 public class ArmBase {
 	CANTalon arm;
-	private static final ArmBase INSTANCE = new ArmBase(); 
+	private static ArmBase INSTANCE = new ArmBase(); 
 	
 	public static ArmBase getInstance(){
+		if(INSTANCE == null)
+			INSTANCE = new ArmBase();
 		return INSTANCE;
 	}
 	

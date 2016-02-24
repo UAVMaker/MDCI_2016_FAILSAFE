@@ -52,21 +52,21 @@ public class Robot extends IterativeRobot {
     
 
     public void autonomousInit(){
-    	
+    	startThreads(systemThreads);
+    	startThreads(autoThreads);
     	}
 
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-    	startThreads(systemThreads);
-    	startThreads(autoThreads);
+
     }
 
     /**
      * This function is called periodically during operator control
      */
-    public void teleopPeriodic() {
+    public void teleopInit() {
     	startThreads(systemThreads);
     	startThreads(teleopThreads);
     }
@@ -74,7 +74,7 @@ public class Robot extends IterativeRobot {
     /**
      * This function is called periodically during test mode
      */
-    public void testPeriodic() {
+    public void testInit() {
     	startThreads(testThreads);
     }
     public void disabledInit(){

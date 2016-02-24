@@ -12,9 +12,11 @@ public class DriveBase {
 	private RobotDrive drive;
 	private double output;
 	private int gear;
-	private static final DriveBase INSTANCE = new DriveBase();
+	private static DriveBase INSTANCE = new DriveBase();
 
 	public static DriveBase getInstance() {
+		if(INSTANCE == null)
+			INSTANCE = new DriveBase();
 		return INSTANCE;
 	}
 

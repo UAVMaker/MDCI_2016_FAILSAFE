@@ -5,9 +5,11 @@ import com.team1601.FRC_2016.Utilities.Logitech;
 public class JoystickManager {
 Logitech[] joysticks;
 Logitech joystick1, joystick2;
-private static final JoystickManager INSTANCE = new JoystickManager();
+private static JoystickManager INSTANCE = new JoystickManager();
 
 public static JoystickManager getInstance(){
+	if(INSTANCE == null)
+		INSTANCE = new JoystickManager();
 	return INSTANCE;
 }
 private JoystickManager(){

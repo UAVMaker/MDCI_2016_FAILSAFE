@@ -4,8 +4,10 @@ import edu.wpi.first.wpilibj.Compressor;
 
 public class Pneumatics{
 	Compressor compressor;
-	private static final Pneumatics INSTANCE = new Pneumatics();
+	private static Pneumatics INSTANCE = new Pneumatics();
 	public static Pneumatics getInstance(){
+		if(INSTANCE == null)
+			INSTANCE = new Pneumatics();
 		return INSTANCE;
 	}
 	private Pneumatics(){

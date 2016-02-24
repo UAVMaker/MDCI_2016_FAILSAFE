@@ -12,10 +12,12 @@ public class ClimbBase {
 	 * Create a private instance of this class to know that it will only be
 	 * created once.
 	 */
-	private static final ClimbBase INSTANCE = new ClimbBase();
+	private static  ClimbBase INSTANCE = new ClimbBase();
 
 	// returns the instance of this class to the outside world.
 	public static ClimbBase getInstance() {
+		if(INSTANCE == null)
+			INSTANCE = new ClimbBase();
 		return INSTANCE;
 	}
 

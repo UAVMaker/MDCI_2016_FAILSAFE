@@ -4,10 +4,13 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 
 public class Sensors {
-private static final Sensors INSTANCE = new Sensors();
+private static Sensors INSTANCE = new Sensors();
 private AnalogGyro gyro;
 private AnalogInput sonar;
+
 public static Sensors getInstance(){
+	if(INSTANCE == null)
+		INSTANCE = new Sensors();
 	return INSTANCE;
 }
 

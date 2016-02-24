@@ -10,9 +10,11 @@ public class ShooterBase {
 	Solenoid shooter;
 
 	boolean shooterActuationOn;
-	private static final ShooterBase INSTANCE = new ShooterBase();
+	private static ShooterBase INSTANCE = new ShooterBase();
 	//Returns Instance of this class to the outsiders
 	public static ShooterBase getInstance() {
+		if(INSTANCE == null)
+			INSTANCE = new ShooterBase();
 		return INSTANCE;
 	}
 	//Private creation of class
