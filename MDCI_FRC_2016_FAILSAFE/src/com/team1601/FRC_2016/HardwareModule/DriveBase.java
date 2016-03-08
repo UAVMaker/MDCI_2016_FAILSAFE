@@ -1,11 +1,13 @@
 package com.team1601.FRC_2016.HardwareModule;
 
+import com.team1601.FRC_2016.Utilities.Functions;
+
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
+import edu.wpi.first.wpilibj.Timer;
 
 public class DriveBase {
 	private CANTalon leftDrive, rightDrive, leftSlaveDrive, rightSlaveDrive;
@@ -13,6 +15,7 @@ public class DriveBase {
 	private double output;
 	private int gear;
 	private static DriveBase INSTANCE = new DriveBase();
+
 
 	public static DriveBase getInstance() {
 		if(INSTANCE == null)
@@ -131,6 +134,19 @@ public class DriveBase {
 	
 	public void moveInches(double inches){
 	
+	}
+	
+	public void fieldDrive(double linear, double left, double right){
+		double straight = linear;
+		double leftArc = left* .5;
+		double rightArc = right*.5;
+		
+double leftVal = straight+leftArc;
+double rightVal = straight+rightArc;
+leftVal = Functions.limitValue(leftVal);
+rightVal = Functions.limitValue(rightVal);
+
+drive.setLeftRightMotorOutputs(leftVal, rightVal);
 	}
 	
 	
