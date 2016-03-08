@@ -97,13 +97,15 @@ public class Robot extends IterativeRobot {
 
 	public void startThreads(Vector<Thread> threads) {
 		for (int i = 0; i <= threads.size(); i++) {
-			((Thread) threads.elementAt(i)).start();
+			if (!((Thread) threads.elementAt(i)).isAlive())
+				((Thread) threads.elementAt(i)).start();
 		}
 	}
 
 	public void stopThreads(Vector<Thread> threads) {
 		for (int i = 0; i <= threads.size(); i++) {
-			((Thread) threads.elementAt(i)).interrupt();
+			if (!((Thread) threads.elementAt(i)).isAlive())
+				((Thread) threads.elementAt(i)).interrupt();
 		}
 	}
 
