@@ -1,0 +1,7 @@
+RoboRio address for the FTP Protocol
+ftp://roborio-XXXX-frc.local/
+where XXXX is the team number. 
+Once filled out just paste the address into the windows explorer.
+All the RIO Files will be accessible.
+You can only open the files in Internet Explorer. 
+But you can Upload and Download the files from the server. 
