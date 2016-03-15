@@ -24,6 +24,6 @@ public class SoftwareConstants {
 	public static final int DRIVE_BASE_RAMP_RATE = 3;
 	public static final double CLIMB_MOTOR_SPEED = .5;
 	
-
+	public static final int MAX_NUMBER_OF_LINES_FROM_FILE = 15;
 
 }

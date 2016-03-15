@@ -1,0 +1,6 @@
+Drive On
+Arm On
+Camera On
+Climb On
+Auto On 
+Auto2 On
