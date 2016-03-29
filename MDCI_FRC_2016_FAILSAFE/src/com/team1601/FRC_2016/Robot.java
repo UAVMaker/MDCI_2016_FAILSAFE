@@ -1,16 +1,17 @@
 
 package com.team1601.FRC_2016;
 
-import java.util.Vector;
-
-import com.team1601.FRC_2016.AutonomousModules.DriveStraightAuto;
-import com.team1601.FRC_2016.SystemModules.PneumaticControl;
-import com.team1601.FRC_2016.TeleoperatedModules.ArmControl;
-import com.team1601.FRC_2016.TeleoperatedModules.Climber;
-import com.team1601.FRC_2016.TeleoperatedModules.DriverControl;
-import com.team1601.FRC_2016.TeleoperatedModules.ShooterControl;
-import com.team1601.FRC_2016.TestModules.GyroTurn;
-import com.team1601.FRC_2016.TestModules.ShooterTest;
+import com.team1601.FRC.Managers.ArmManager;
+import com.team1601.FRC.Managers.ClimbManager;
+import com.team1601.FRC.Managers.CompressorManager;
+import com.team1601.FRC.Managers.DriveManager;
+import com.team1601.FRC.Managers.GyroManager;
+import com.team1601.FRC.Managers.JoystickManager;
+import com.team1601.FRC.Managers.ShooterManager;
+import com.team1601.FRC.Managers.SonarManager;
+import com.team1601.FRC.Managers.SystemsManager;
+import com.team1601.FRC.Managers.VisionManager;
+import com.team1601.FRC_2016.HardwareModule.HardwareCentral;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -22,7 +23,17 @@ public class Robot extends IterativeRobot {
 	final String customAuto = "My Auto";
 	String autoSelected;
 	SendableChooser chooser;
-	Vector<Thread> systemThreads, autoThreads, testThreads, teleopThreads;
+	HardwareCentral hardware;
+	ArmManager arm;
+	ClimbManager climb;
+	CompressorManager compressor;
+	DriveManager drive;
+	GyroManager gyro;
+	JoystickManager joysticks;
+	ShooterManager shooter;
+	SonarManager sonar;
+	SystemsManager system;
+	VisionManager vision;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -33,30 +44,35 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Default Auto", defaultAuto);
 		chooser.addObject("My Auto", customAuto);
 		SmartDashboard.putData("Auto choices", chooser);
-
-		systemThreads = new Vector<Thread>();
-		systemThreads.addElement(new PneumaticControl());
-
-		autoThreads = new Vector<Thread>();
-		autoThreads.addElement(new DriveStraightAuto());
-
-		testThreads = new Vector<Thread>();
-		testThreads.addElement(new ShooterTest());
-		testThreads.addElement(new GyroTurn());
-
-		teleopThreads = new Vector<Thread>();
-		teleopThreads.addElement(new ArmControl());
-		teleopThreads.addElement(new DriverControl());
-		teleopThreads.addElement(new ShooterControl());
-		teleopThreads.addElement(new Climber());
-
+		if(HardwareCentral.initialized){hardware = HardwareCentral.getInstance();
+		
+		arm = ArmManager.getInstance();
+		arm.initialize();
+		climb = ClimbManager.getInstance();
+		climb.initialize();
+		compressor = CompressorManager.getInstance();
+		compressor.initialize();
+		drive = DriveManager.getInstance();
+		drive.initialize();
+		gyro = GyroManager.getInstance();
+		gyro.initialize();
+		joysticks = JoystickManager.getInstance();
+		joysticks.initialize();
+		shooter = ShooterManager.getInstance();
+		shooter.initialize();
+		sonar = SonarManager.getInstance();
+		sonar.initialize();
+		system = SystemsManager.getInstance();
+		system.read();
+		vision = VisionManager.getInstance();
+		vision.initialize();
+		}else{
+			System.out.println("Quantum your missing a PARTICLE");
+		}
 	}
 
 	public void autonomousInit() {
-		startThreads(systemThreads);
-		startThreads(autoThreads);
-		stopThreads(teleopThreads);
-		stopThreads(testThreads);
+		
 	}
 	
 
@@ -71,18 +87,14 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopInit() {
-		startThreads(systemThreads);
-		startThreads(teleopThreads);
-		stopThreads(autoThreads);
+		
 	}
 
 	/**
 	 * This function is called periodically during test mode
 	 */
 	public void testInit() {
-		startThreads(testThreads);
-		stopThreads(teleopThreads);
-		stopThreads(autoThreads);
+
 	}
 
 	public void disabledInit() {
@@ -90,24 +102,9 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void disabledPeriodic() {
-		stopThreads(systemThreads);
-		stopThreads(autoThreads);
-		stopThreads(teleopThreads);
-		stopThreads(testThreads);
+
 	}
 
-	public void startThreads(Vector<Thread> threads) {
-		for (int i = 0; i <= threads.size(); i++) {
-			if (!((Thread) threads.elementAt(i)).isAlive())
-				((Thread) threads.elementAt(i)).start();
-		}
-	}
 
-	public void stopThreads(Vector<Thread> threads) {
-		for (int i = 0; i <= threads.size(); i++) {
-			if (!((Thread) threads.elementAt(i)).isAlive())
-				((Thread) threads.elementAt(i)).interrupt();
-		}
-	}
 
 }

@@ -1,7 +1,8 @@
 package com.team1601.FRC_2016.Utilities;
 
 /*********************************************************
- *This class provides useful functions for everyday use. 
+ *This class provides useful functions for everyday use.
+ *From Team 1114 Simbotics Software. 
  * @author Naresh 
  * 
  * 
